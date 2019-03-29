@@ -1,0 +1,44 @@
+
+ 添加erlang solutions源
+ wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+ rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
+ yum install epel-release
+ yum install erlang -y
+
+配置rabbit前先执行这个脚本
+https://packagecloud.io/rabbitmq/rabbitmq-server/install
+https://www.rabbitmq.com/releases/
+
+
+安装RabbitMQ：
+wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6-1.el7.noarch.rpm
+yum install rabbitmq-server-3.6.6-1.el7.noarch.rpm -y
+
+启动
+systemctl start rabbitmq-server
+
+开启管理UI
+rabbitmq-plugins enable rabbitmq_management
+
+配置防火墙
+firewall-cmd --zone=public --add-port=15672/tcp --permanent
+firewall-cmd --reload
+启动： systemctl start firewalld
+关闭： systemctl stop firewalld
+查看状态： systemctl status firewalld 
+开机禁用  ： systemctl disable firewalld
+开机启用  ： systemctl enable firewalld
+
+
+添加用户
+rabbitmqctl add_user  user_admin  passwd_admin 
+
+删除用户
+rabbitmqctl delete_user Username
+
+用户角色（权限）
+rabbitmqctl set_user_tags user_admin administrator  
+
+查看用户
+rabbitmqctl list_users
+
